@@ -2,12 +2,17 @@ use inc::Module::Install;
 name 'App-Logic';
 all_from 'lib/App/Logic.pm';
 
-# requires '';
+requires (
+    'Mouse' => 0,
+    'CGI::Carp' => 0,
+);
+
+recommends (
+    'Data::FormValidator' => 0,
+);
 
 tests 't/*.t';
-author_tests 'xt';
 
 build_requires 'Test::More';
-use_test_base;
 auto_include;
 WriteAll;
