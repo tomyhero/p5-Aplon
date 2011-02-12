@@ -14,7 +14,37 @@ sub BUILD {
 sub abort {
     my $self = shift;
     my $args = shift || {};
+
+    my @error_keys = ();
+
+    if($args->{missing}){
+        for(@{$args->{missing}}){
+            my $key = join '.', 'logic', $_ , 'missing';
+            push @error_keys,$key;
+        }
+    }
+
+    if($args->{invalid}){
+        for (@{$args->{invalid}}){
+            for my $k (@{$_->{$_}}) {
+                my $key = join '.', 'logic', $_, 'invalid' , $k;
+                push @error_keys,$key;
+            }
+        }
+    }
+    $args->{error_keys} = \@error_keys;
     croak $self->error_class->new($args);
+}
+
+sub abort_with {
+    my $self = shift;
+    my $error_name = shift ;
+    my $args = { code => 'ERROR' };
+    $args->{custom_invalid} = [$error_name];
+    my $key = join '.', 'logic','custom_invalid',$error_name ;
+    $args->{error_keys} = [$key];
+    croak $self->error_class->new($args);
+
 }
 
 __PACKAGE__->meta->make_immutable();
