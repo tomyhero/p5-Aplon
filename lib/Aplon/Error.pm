@@ -4,6 +4,7 @@ use Mouse;
 has 'code' => ( is => 'rw' , default => 'ERROR' );
 has 'missing' => (is => 'rw', default => sub { [] } );
 has 'invalid' => (is => 'rw', default => sub { {} } );
+has 'valid' => (is => 'rw', default => sub { {} } );
 has 'custom_invalid' => (is => 'rw', default => sub { [] } );
 has 'error_keys' => ( is => 'rw' , default => sub { [] } );
 

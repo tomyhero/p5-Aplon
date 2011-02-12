@@ -29,6 +29,7 @@ my $logic = TestLogic::DFV->new();
         is_deeply($error_obj->missing ,['name'] , 'get_name missing'); 
         is_deeply($error_obj->error_keys ,['logic.name.missing'] , 'get_name missing error_keys');
         is_deeply($error_obj->messages ,['name is missing'] , 'get_name missing message');
+        is_deeply($error_obj->valid ,{ status => 1 }  , 'get_name valid');
     }
 }
 
@@ -44,6 +45,7 @@ my $logic = TestLogic::DFV->new();
     if(my $error_obj = $@){ 
         is_deeply($error_obj->invalid,{ name => [ 'max_length','invalid'] } ,'get_name invalid'); 
         is_deeply($error_obj->error_keys ,['logic.name.max_length','logic.name.invalid'] , 'get_name invalid error_keys');
+        is_deeply($error_obj->valid ,{ status => 1 }  , 'get_name valid');
     }
 }
 
@@ -51,6 +53,7 @@ my $logic = TestLogic::DFV->new();
 {
     eval { $logic->get_name({ name => 'aaaa', status => 0 }) }; 
     if(my $error_obj = $@){ 
+        is_deeply($error_obj->valid ,{ name => 'aaaa',status => 0 }  , 'get_name valid');
         is_deeply($error_obj->custom_invalid,[ 'not_found' ] ,'get_name custom invalid'); 
         is_deeply($error_obj->error_keys ,['logic.custom_invalid.not_found'] , 'get_name cutom invalid error_keys');
     }

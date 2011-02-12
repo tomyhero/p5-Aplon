@@ -39,19 +39,18 @@ sub validate {
 
 sub abort_with {
     my $self = shift;
-    my $dfv_results_or_error_name  = shift ;
+    my $dfv_results  = shift ;
+    my $error_name = shift;
     my $args = { code => 'DFV_ERROR' }; 
    
-    # not obj but str.
-    unless ( ref $dfv_results_or_error_name ){
-        my $error_name = $dfv_results_or_error_name;
+    $args->{valid} = $dfv_results->valid;
+
+    if ( $error_name ){
         $args->{custom_invalid} = [$error_name];
         my $key = join '.', 'logic','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
         croak $self->error_class->new($args);
     }
-
-    my $dfv_results =$dfv_results_or_error_name;
 
     if($dfv_results->has_missing){
         $args->{missing} = $dfv_results->missing;

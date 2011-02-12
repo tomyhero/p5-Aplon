@@ -15,7 +15,7 @@ sub get_name {
             return $results->valid->{name};
         }
         else {
-            $self->abort_with('not_found');
+            $self->abort_with($results,'not_found');
         }
     }
 }

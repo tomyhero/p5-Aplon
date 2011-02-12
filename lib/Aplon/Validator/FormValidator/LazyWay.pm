@@ -35,18 +35,18 @@ sub validate {
 
 sub abort_with {
     my $self = shift;
-    my $fl_results_or_error_name = shift ;
+    my $results = shift ;
+    my $error_name = shift;
     my $args = { code => 'FL_ERROR' }; 
 
-    unless ( ref $fl_results_or_error_name ){
-        my $error_name = $fl_results_or_error_name;
+    $args->{valid} = $results->valid;
+
+    if ( $error_name ){
         $args->{custom_invalid} = [$error_name];
         my $key = join '.', 'logic','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
         croak $self->error_class->new($args);
     }
-
-    my $results = $fl_results_or_error_name;
 
     if($results->has_missing){
         $args->{missing} = $results->missing;
