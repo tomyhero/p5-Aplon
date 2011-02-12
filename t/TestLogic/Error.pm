@@ -2,6 +2,8 @@ package TestLogic::Error;
 use Mouse;
 extends 'App::Logic::Error';
 
+has 'error_message' => ( is => 'rw' , default => sub { {} } );
+
 sub messages {
     my $self = shift;
     my @messages = ();
@@ -19,10 +21,10 @@ sub messages {
 
 sub ERROR_messages {
     +{
-        'dfv.user_id.missing' => 'user id is missing',
-        'dfv.name.missing' => 'name is missing',
-        'dfv.user_id.invalid' => 'user_id is invalid',
-        'dfv.name.invalid' => 'name is invalid',
+        'logic.user_id.missing' => 'user id is missing',
+        'logic.name.missing' => 'name is missing',
+        'logic.user_id.invalid' => 'user_id is invalid',
+        'logic.name.invalid' => 'name is invalid',
     }
 }
 

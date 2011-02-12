@@ -2,12 +2,21 @@ use Test::Most;
 use lib './t';
 SKIP: {
 
-eval { require Data::FormValidator; };
-skip "Data::FormValidator not installed", 2 if $@;
+eval { 
+    require FormValidator::LazyWay; 
+};
 
-use_ok('TestLogic::DFV');
+skip "FormValidator::LazyWay not installed", 1 if $@;
+eval {
+    require YAML::Syck; #XXX
+    require Data::Section::Simple; #XXX
+};
 
-my $logic = TestLogic::DFV->new();
+skip "YAML::Syck or Data::Section::Simple not installed", 1 if $@;
+
+use_ok('TestLogic::FL');
+
+my $logic = TestLogic::FL->new();
 
 # ok
 {
@@ -36,15 +45,15 @@ my $logic = TestLogic::DFV->new();
 {
     eval { $logic->get_id('hoge'); }; 
     if(my $error_obj = $@){ 
-        is_deeply($error_obj->invalid,{user_id => [ 'invalid' ] } , 'get_id invalid' ); 
-        is_deeply($error_obj->error_keys ,['logic.user_id.invalid'] , 'get_id invalid error_keys');
+        is_deeply($error_obj->invalid,{user_id => [ 'Number#uint' ] } , 'get_id invalid' ); 
+        is_deeply($error_obj->error_keys ,['logic.user_id.invalid.Number#uint'] , 'get_id invalid error_keys');
     }
 
     eval { $logic->get_name({ name => 'a a padifoja pafsodfij apdfoij', status => 1 }) }; 
     if(my $error_obj = $@){ 
-        is_deeply($error_obj->invalid,{ name => [ 'max_length','invalid'] } ,'get_name invalid'); 
-        is_deeply($error_obj->error_keys ,['logic.name.max_length','logic.name.invalid'] , 'get_name invalid error_keys');
-    }
+        is_deeply($error_obj->invalid,{ name => [ 'String#length','String#nonsymbol_ascii'] } ,'get_name invalid'); 
+        is_deeply($error_obj->error_keys ,['logic.name.invalid.String#length','logic.name.invalid.String#nonsymbol_ascii'] , 'get_name invalid error_keys');
+        is_deeply($error_obj->error_message , { 'name' => 'name supports minimun 1 letters and maximum 10 letters,alphabet, number .'},'get_name invalid error_message'); }
 }
 
 # custom invalid  

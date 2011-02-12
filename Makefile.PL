@@ -11,6 +11,9 @@ recommends (
     'Data::FormValidator' => 0,
 );
 
+test_requires (
+    'Test::Most' => 0,
+);
 tests 't/*.t';
 
 build_requires 'Test::More';

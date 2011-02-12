@@ -46,7 +46,7 @@ sub abort_with {
     unless ( ref $dfv_results_or_error_name ){
         my $error_name = $dfv_results_or_error_name;
         $args->{custom_invalid} = [$error_name];
-        my $key = join '.', 'dfv','custom_invalid',$error_name ;
+        my $key = join '.', 'logic','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
         croak $self->error_class->new($args);
     }
@@ -85,14 +85,14 @@ sub DFV_error_keys_handler {
         my ($dfv) = shift;
         my @msgs;
         for my $name($dfv->missing) {
-            my $key = join '.', 'dfv', $name, 'missing';
+            my $key = join '.', 'logic', $name, 'missing';
             push @msgs ,$key;
         }
         for my $name($dfv->invalid) {
             my $hash = {};
             for my $reason(@{$dfv->invalid($name)}) {
                 $reason = 'invalid' if !$reason || ref $reason;
-                my $key = join '.', 'dfv', $name, $reason;
+                my $key = join '.', 'logic', $name, $reason;
                 $hash->{$key} = 1;
             }
             for(keys %$hash){
