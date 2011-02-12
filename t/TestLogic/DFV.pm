@@ -23,7 +23,12 @@ sub get_name {
         $self->abort_with($results);
     }
     else {
-        $results->valid->{name};
+        if($results->valid->{status}){
+            return $results->valid->{name};
+        }
+        else {
+            $self->abort_with('not_found');
+        }
     }
 }
 
@@ -36,7 +41,7 @@ sub get_id {
         $self->abort_with($results);
     }
     else {
-        return $results->valid->{user_id};
+        $results->valid->{user_id};
     }
 
 }
