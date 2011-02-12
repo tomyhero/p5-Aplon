@@ -1,4 +1,4 @@
-package App::Logic::Validator::FormValidator::LazyWay;
+package Aplon::Validator::FormValidator::LazyWay;
 use Mouse::Role;
 use FormValidator::LazyWay;
 use CGI::Carp;

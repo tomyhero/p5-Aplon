@@ -1,6 +1,6 @@
 use inc::Module::Install;
-name 'App-Logic';
-all_from 'lib/App/Logic.pm';
+name 'Aplon';
+all_from 'lib/Aplon.pm';
 
 requires (
     'Mouse' => 0,
@@ -9,6 +9,7 @@ requires (
 
 recommends (
     'Data::FormValidator' => 0,
+    'FormValidator::LazyWay' => 0,
 );
 
 test_requires (

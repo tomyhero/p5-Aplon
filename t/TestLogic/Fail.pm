@@ -1,6 +1,6 @@
 package TestLogic::Fail;
 use Mouse;
-extends 'App::Logic';
+extends 'Aplon';
 
 sub do_something {
     my $self = shift;

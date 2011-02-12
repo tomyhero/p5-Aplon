@@ -9,7 +9,7 @@ eval {
 }; 
 
 if(my $error_obj = $@){
-    isa_ok($error_obj ,'App::Logic::Error');
+    isa_ok($error_obj ,'Aplon::Error');
 }
 
 done_testing();

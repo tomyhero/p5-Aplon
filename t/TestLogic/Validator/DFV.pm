@@ -1,6 +1,6 @@
 package TestLogic::Validator::DFV;
 use Mouse::Role;
-with 'App::Logic::Validator::Data::Form::Validator';
+with 'Aplon::Validator::Data::Form::Validator';
 use Data::FormValidator::Constraints qw(:closures);
 
 

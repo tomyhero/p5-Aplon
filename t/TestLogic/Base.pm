@@ -1,6 +1,6 @@
 package TestLogic::Base;
 use Mouse;
-extends 'App::Logic';
+extends 'Aplon';
 has '+error_class' => ( is => 'rw', default => 'TestLogic::Error' );
 
 sub get_name {

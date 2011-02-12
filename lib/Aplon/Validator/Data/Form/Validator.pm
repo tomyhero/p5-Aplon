@@ -1,4 +1,4 @@
-package App::Logic::Validator::Data::Form::Validator;
+package Aplon::Validator::Data::Form::Validator;
 use Mouse::Role;
 use Data::FormValidator;
 use CGI::Carp;

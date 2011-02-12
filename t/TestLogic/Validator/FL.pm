@@ -2,7 +2,7 @@ package TestLogic::Validator::FL;
 use Mouse::Role;
 use YAML::Syck();
 use Data::Section::Simple;
-with 'App::Logic::Validator::FormValidator::LazyWay';
+with 'Aplon::Validator::FormValidator::LazyWay';
 
 our $FV;
 sub FL_instance {

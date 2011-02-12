@@ -1,6 +1,6 @@
 package TestLogic::Error;
 use Mouse;
-extends 'App::Logic::Error';
+extends 'Aplon::Error';
 
 has 'error_message' => ( is => 'rw' , default => sub { {} } );
 

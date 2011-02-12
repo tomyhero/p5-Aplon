@@ -1,9 +1,9 @@
-package App::Logic;
+package Aplon;
 use Mouse;
 use CGI::Carp;
 our $VERSION = '0.01';
 
-has 'error_class' => ( is => 'rw', default => 'App::Logic::Error' );
+has 'error_class' => ( is => 'rw', default => 'Aplon::Error' );
 has 'logic_user' => ( is => 'rw', default => 'WEB_USER' );
 
 sub BUILD {
@@ -27,7 +27,7 @@ __END__
 
 =head1 NAME
 
-App::Logic -
+Aplon -
 
 =head1 SYNOPSIS
 
@@ -47,7 +47,7 @@ App::Logic -
 
 =head1 DESCRIPTION
 
-App::Logic is base class of your Application Logic Class.
+Aplon is base class of your Application Logic Class.
 
 =head1 AUTHOR
 

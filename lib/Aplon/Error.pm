@@ -1,4 +1,4 @@
-package App::Logic::Error;
+package Aplon::Error;
 use Mouse;
 
 has 'code' => ( is => 'rw' , default => 'ERROR' );
@@ -15,11 +15,11 @@ no Mouse;
 
 =head1 NAME
 
-App::Logic::Error - Error Object.
+Aplon::Error - Error Object.
 
 =head1 SYNOPSIS
 
- my $error_obj = App::Logic::Error->new({ 
+ my $error_obj = Aplon::Error->new({ 
     code => "ERROR_NAME",
     missing => ['ore_id'],
  });
