@@ -4,7 +4,7 @@ use CGI::Carp;
 our $VERSION = '0.01';
 
 has 'error_class' => ( is => 'rw', default => 'Aplon::Error' );
-has 'logic_user' => ( is => 'rw', default => 'WEB_USER' );
+has 'aplon_user' => ( is => 'rw', default => 'WEB_USER' );
 
 sub BUILD {
     my $self = shift;
