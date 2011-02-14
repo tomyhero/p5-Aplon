@@ -1,7 +1,7 @@
 package Aplon;
 use Mouse;
 use CGI::Carp;
-our $VERSION = '0.01';
+our $VERSION = '0.01_01';
 
 has 'error_class' => ( is => 'rw', default => 'Aplon::Error' );
 has 'aplon_user' => ( is => 'rw', default => 'WEB_USER' );

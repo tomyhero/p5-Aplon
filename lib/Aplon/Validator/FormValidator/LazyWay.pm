@@ -14,7 +14,7 @@ sub BUILD {
     $self->FL_instance();
 }
 
-sub validate {
+sub validate_with {
     my ($self,$params,$name,$stash) = @_;
 
     unless ($name) {
@@ -32,6 +32,23 @@ sub validate {
 
     return $form;
 }
+
+sub assert_with {
+    my $self = shift;
+    my $params = shift || {};
+    my $name = shift;
+    my $stash = shift;
+
+    unless ($name) {
+        ($name = (caller 1)[3]) =~ s/.*:://;
+    }
+    my $results = $self->validate_with($params,$name);
+    if ($results->has_invalid or $results->has_missing) {
+        $self->abort_with($results);
+    }
+    return $results;
+}
+
 
 sub abort_with {
     my $self = shift;

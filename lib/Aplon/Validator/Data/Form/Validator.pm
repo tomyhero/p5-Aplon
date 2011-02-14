@@ -8,7 +8,7 @@ sub profiles {
     croak 'profiles() is ABSTRACT METHOD';
 }
 
-sub validate {
+sub validate_with {
     my $self = shift;
     my $params = shift || {};
     my $name = shift;
@@ -35,6 +35,21 @@ sub validate {
     }
 
     $dfv->check($params,$profile); 
+}
+
+sub assert_with {
+    my $self = shift;
+    my $params = shift || {};
+    my $name = shift;
+
+    unless ($name) {
+        ($name = (caller 1)[3]) =~ s/.*:://;
+    }
+    my $results = $self->validate_with($params,$name);
+    if ($results->has_invalid or $results->has_missing) {
+        $self->abort_with($results);
+    }
+    return $results;
 }
 
 sub abort_with {
