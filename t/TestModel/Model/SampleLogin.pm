@@ -1,6 +1,6 @@
-package TestLogic::Logic::SampleLogin;
+package TestModel::Model::SampleLogin;
 use Mouse;
-extends 'Aplon::Logic::SampleLogin';
+extends 'Aplon::Model::SampleLogin';
 
 sub APLON_find_user {
     my $self = shift;

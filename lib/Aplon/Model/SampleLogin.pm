@@ -1,4 +1,4 @@
-package Aplon::Logic::SampleLogin;
+package Aplon::Model::SampleLogin;
 use Mouse;
 use CGI::Carp;
 extends 'Aplon';

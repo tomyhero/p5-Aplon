@@ -19,7 +19,7 @@ sub abort {
 
     if($args->{missing}){
         for(@{$args->{missing}}){
-            my $key = join '.', 'logic', $_ , 'missing';
+            my $key = join '.', 'model', $_ , 'missing';
             push @error_keys,$key;
         }
     }
@@ -27,7 +27,7 @@ sub abort {
     if($args->{invalid}){
         for (@{$args->{invalid}}){
             for my $k (@{$_->{$_}}) {
-                my $key = join '.', 'logic', $_, 'invalid' , $k;
+                my $key = join '.', 'model', $_, 'invalid' , $k;
                 push @error_keys,$key;
             }
         }
@@ -41,7 +41,7 @@ sub abort_with {
     my $error_name = shift ;
     my $args = { code => 'ERROR' };
     $args->{custom_invalid} = [$error_name];
-    my $key = join '.', 'logic','custom_invalid',$error_name ;
+    my $key = join '.', 'model','custom_invalid',$error_name ;
     $args->{error_keys} = [$key];
     croak $self->error_class->new($args);
 
@@ -62,13 +62,13 @@ Aplon -
 =head1 SYNOPSIS
 
  use Try::Tiny ; 
- my $logic = Your::Logic::User->new();
+ my $model = Your::model::User->new();
 
  try {
-    my $obj = $logic->lookup(1234);
+    my $obj = $model->lookup(1234);
  } 
  catch {
-    my $error_obj = $_ ; # Your::Logic::Error
+    my $error_obj = $_ ; # Your::model::Error
 
  }
  finaly {
@@ -77,7 +77,7 @@ Aplon -
 
 =head1 DESCRIPTION
 
-Aplon is base class of your Application Logic Class.
+Aplon is base class of your Application model Class.
 
 =head1 AUTHOR
 

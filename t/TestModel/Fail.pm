@@ -1,4 +1,4 @@
-package TestLogic::Fail;
+package TestModel::Fail;
 use Mouse;
 extends 'Aplon';
 

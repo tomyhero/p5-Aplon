@@ -1,7 +1,8 @@
-package TestLogic::FL;
+package TestModel::DFV;
 use Mouse;
-extends 'TestLogic::Base';
-with 'TestLogic::Validator::FL';
+extends 'TestModel::Base';
+with 'TestModel::Validator::DFV';
+
 
 sub profiles {
     my $self = shift;
@@ -15,7 +16,6 @@ sub profiles {
         }
     }
 }
-
 __PACKAGE__->meta->make_immutable();
 
 no Mouse;

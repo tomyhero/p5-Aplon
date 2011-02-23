@@ -1,4 +1,4 @@
-package TestLogic::Validator::DFV;
+package TestModel::Validator::DFV;
 use Mouse::Role;
 with 'Aplon::Validator::Data::Form::Validator';
 use Data::FormValidator::Constraints qw(:closures);

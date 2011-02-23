@@ -1,11 +1,11 @@
 use Test::Most;
 use lib 't/';
-use_ok( 'TestLogic::Fail');
+use_ok( 'TestModel::Fail');
 
-my $logic = TestLogic::Fail->new();
+my $model = TestModel::Fail->new();
 
 eval {
-    $logic->do_something();
+    $model->do_something();
 }; 
 
 if(my $error_obj = $@){

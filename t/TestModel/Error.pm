@@ -1,4 +1,4 @@
-package TestLogic::Error;
+package TestModel::Error;
 use Mouse;
 extends 'Aplon::Error';
 
@@ -21,10 +21,10 @@ sub messages {
 
 sub ERROR_messages {
     +{
-        'logic.user_id.missing' => 'user id is missing',
-        'logic.name.missing' => 'name is missing',
-        'logic.user_id.invalid' => 'user_id is invalid',
-        'logic.name.invalid' => 'name is invalid',
+        'model.user_id.missing' => 'user id is missing',
+        'model.name.missing' => 'name is missing',
+        'model.user_id.invalid' => 'user_id is invalid',
+        'model.name.invalid' => 'name is invalid',
     }
 }
 

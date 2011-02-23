@@ -1,7 +1,7 @@
-package TestLogic::Base;
+package TestModel::Base;
 use Mouse;
 extends 'Aplon';
-has '+error_class' => ( is => 'rw', default => 'TestLogic::Error' );
+has '+error_class' => ( is => 'rw', default => 'TestModel::Error' );
 
 sub get_name {
     my $self = shift;

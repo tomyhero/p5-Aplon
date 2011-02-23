@@ -1,4 +1,4 @@
-package TestLogic::Validator::FL;
+package TestModel::Validator::FL;
 use Mouse::Role;
 use YAML::Syck();
 use Data::Section::Simple;
@@ -7,15 +7,15 @@ with 'Aplon::Validator::FormValidator::LazyWay';
 our $FV;
 sub FL_instance {
     my $self = shift;
-    if($TestLogic::Validator::FV){
-        return $TestLogic::Validator::FV;
+    if($TestModel::Validator::FV){
+        return $TestModel::Validator::FV;
     }
     else {
-        my $reader = Data::Section::Simple->new('TestLogic::Validator::FL');
+        my $reader = Data::Section::Simple->new('TestModel::Validator::FL');
         my $yaml = $reader->get_data_section('validate.yaml');
         my $config = YAML::Syck::Load( $yaml);
         my $lw = FormValidator::LazyWay->new( config => $config);
-        $TestLogic::Validator::FV = $lw;
+        $TestModel::Validator::FV = $lw;
         return $lw;
     }
 }
