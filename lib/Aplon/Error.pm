@@ -7,6 +7,7 @@ has 'invalid' => (is => 'rw', default => sub { {} } );
 has 'valid' => (is => 'rw', default => sub { {} } );
 has 'custom_invalid' => (is => 'rw', default => sub { [] } );
 has 'error_keys' => ( is => 'rw' , default => sub { [] } );
+has 'message' => ( is => 'rw');
 
 __PACKAGE__->meta->make_immutable();
 
