@@ -44,13 +44,30 @@ sub assert_with {
     }
     my $results = $self->validate_with($params,$name);
     if ($results->has_invalid or $results->has_missing) {
-        $self->abort_with($results);
+        $self->abort_with_result($results);
     }
-    return $results;
+    $self->{'__RESULTS' } = $results;
+
+    return $results->valid;
 }
 
-
 sub abort_with {
+    my $self = shift;
+    my $error_name = shift || 'custom_error';
+
+    my $args = {};
+    $args->{valid} = $self->{'__RESULTS'}->valid if $self->{'__RESULTS'};
+
+    if ( $error_name ){
+        $args->{custom_invalid} = ref $error_name ? $error_name : [$error_name];
+        my $key = join '.', 'model','custom_invalid',$error_name ;
+        $args->{error_keys} = [$key];
+        croak $self->error_class->new($args);
+    }
+
+}
+
+sub abort_with_result {
     my $self = shift;
     my $results = shift ;
     my $error_name = shift;
