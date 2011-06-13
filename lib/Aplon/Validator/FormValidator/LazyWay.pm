@@ -42,7 +42,7 @@ sub assert_with {
     unless ($name) {
         ($name = (caller 1)[3]) =~ s/.*:://;
     }
-    my $results = $self->validate_with($params,$name);
+    my $results = $self->validate_with($params,$name,$stash);
     if ($results->has_invalid or $results->has_missing) {
         $self->abort_with_result($results);
     }
