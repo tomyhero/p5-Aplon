@@ -1,8 +1,7 @@
 package TestModel::Error;
 use Mouse;
 extends 'Aplon::Error';
-
-has 'error_message' => ( is => 'rw' , default => sub { {} } );
+with 'Aplon::Error::Role::LazyWay';
 
 sub messages {
     my $self = shift;
