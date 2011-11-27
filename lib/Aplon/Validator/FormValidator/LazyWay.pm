@@ -1,11 +1,11 @@
 package Aplon::Validator::FormValidator::LazyWay;
 use Mouse::Role;
 use FormValidator::LazyWay;
-use CGI::Carp;
+use CGI::Carp();
 
 sub profiles {
     my $self = shift;
-    croak 'profiles() is ABSTRACT METHOD';
+    CGI::Carp::croak 'profiles() is ABSTRACT METHOD';
 }
 
 sub BUILD {
@@ -54,15 +54,15 @@ sub assert_with {
 sub abort_with {
     my $self = shift;
     my $error_name = shift || 'custom_error';
+    my $args = shift || {};
 
-    my $args = {};
     $args->{valid} = $self->{'__RESULTS'}->valid if $self->{'__RESULTS'};
 
     if ( $error_name ){
         $args->{custom_invalid} = ref $error_name ? $error_name : [$error_name];
         my $key = join '.', 'model','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
-        croak $self->error_class->new($args);
+        CGI::Carp::croak $self->error_class->new($args);
     }
 
 }
@@ -79,7 +79,7 @@ sub abort_with_result {
         $args->{custom_invalid} = [$error_name];
         my $key = join '.', 'model','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
-        croak $self->error_class->new($args);
+        CGI::Carp::croak $self->error_class->new($args);
     }
 
     if($results->has_missing){
@@ -102,7 +102,7 @@ sub abort_with_result {
      # lazyway error message
      $args->{error_message} = $results->error_message;
 
-    croak $self->error_class->new($args);
+    CGI::Carp::croak $self->error_class->new($args);
 }
 
 sub FL_error_keys_handler {
