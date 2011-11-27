@@ -1,7 +1,7 @@
 package Aplon;
 use Mouse;
 use CGI::Carp;
-our $VERSION = '0.01_03';
+our $VERSION = '0.01_04';
 
 has 'error_class' => ( is => 'rw', default => 'Aplon::Error' );
 has 'aplon_user' => ( is => 'rw', default => 'WEB_USER' );
@@ -39,7 +39,9 @@ sub abort {
 sub abort_with {
     my $self = shift;
     my $error_name = shift ;
-    my $args = { code => 'ERROR' };
+    my $args = shift || {};
+    $args->{code} ||= 'ERROR';
+
     $args->{custom_invalid} = [$error_name];
     my $key = join '.', 'model','custom_invalid',$error_name ;
     $args->{error_keys} = [$key];

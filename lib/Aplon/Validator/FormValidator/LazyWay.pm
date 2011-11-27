@@ -53,8 +53,9 @@ sub assert_with {
 
 sub abort_with {
     my $self = shift;
-    my $error_name = shift || 'custom_error';
+    my $error_name = shift ;
     my $args = shift || {};
+    $args->{code} ||= 'ERROR';
 
     $args->{valid} = $self->{'__RESULTS'}->valid if $self->{'__RESULTS'};
 
@@ -62,6 +63,9 @@ sub abort_with {
         $args->{custom_invalid} = ref $error_name ? $error_name : [$error_name];
         my $key = join '.', 'model','custom_invalid',$error_name ;
         $args->{error_keys} = [$key];
+        CGI::Carp::croak $self->error_class->new($args);
+    }
+    else {
         CGI::Carp::croak $self->error_class->new($args);
     }
 
