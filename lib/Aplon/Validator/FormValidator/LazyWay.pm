@@ -21,7 +21,7 @@ sub validate_with {
         ($name = (caller 1)[3]) =~ s/.*:://;
     }
 
-    my $profile = $self->profiles->{$name} or die 'profile not found:' . $name ;
+    my $profile = (ref $name ? $name : $self->profiles->{$name}) or die 'profile not found:' . $name ;
 
     if($stash){
         $profile->{stash} = $stash;
